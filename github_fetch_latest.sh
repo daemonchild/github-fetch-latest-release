@@ -18,7 +18,7 @@
 # Test for parameters being passed to the script
 if test -z "$1"; then
 
-	echo "github_fetch_latest.sh [github-repo] [keyword] [output_dir]"
+    echo "github_fetch_latest.sh [github-repo] [keyword] [output_dir]"
     echo "Eg:"
     echo "github_fetch_latest.sh daemonchild/yaarl amd64 /root"
     echo
@@ -36,9 +36,14 @@ else
     #REPO_NAME=${REPO_ARRAY[1]}  
 
     releases_url="https://api.github.com/repos/$REPO/releases/latest"
+    echo $releases_url
 
     repo_url=$(curl -s $releases_url | grep -oP '"url": "\K(.*)(?=")')
+    echo $repo_url
+    
     fetch_url=$(curl -s $repo_url | grep -oP '"browser_download_url": "\K(.*)(?=")' | grep $KEYWORD)
+    echo $fetch_url
+    
     cd $OUTPUT_DIR
     wget $fetch_url[0] -q
     cd $SAVE_DIR
