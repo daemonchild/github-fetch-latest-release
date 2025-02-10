@@ -26,6 +26,8 @@ if test -z "$1"; then
 # else process the parameters
 else
 
+    echo "Fetching $1 Latest Release"
+
     REPO=$1
     KEYWORD=$2
     OUTPUT_DIR=$3
